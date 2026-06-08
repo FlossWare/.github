@@ -1,6 +1,6 @@
-FlossWare
+# FlossWare
 
-Building modular, reusable infrastructure for the AI era.
+**Building modular, reusable infrastructure for the AI era.**
 
 FlossWare is an open-source engineering organization focused on creating practical software, reusable libraries, and interoperable systems designed to evolve alongside rapidly changing technology.
 
@@ -8,7 +8,7 @@ We believe good software should outlive individual frameworks, vendors, and AI m
 
 ---
 
-Engineering Philosophy
+## Engineering Philosophy
 
 Our projects are guided by a few simple principles:
 
@@ -23,7 +23,7 @@ We value practical engineering over hype and long-term maintainability over shor
 
 ---
 
-AI-First Development
+## AI-First Development
 
 Artificial intelligence is a core part of our engineering process.
 
@@ -41,11 +41,11 @@ AI accelerates development, but engineering judgment remains responsible for cor
 
 ---
 
-What We Build
+## What We Build
 
 FlossWare develops reusable infrastructure for modern software systems.
 
-AI Infrastructure
+### AI Infrastructure
 
 Libraries and tools for:
 
@@ -55,7 +55,7 @@ Libraries and tools for:
 - Vector database abstraction
 - Workflow automation
 
-Developer Infrastructure
+### Developer Infrastructure
 
 Reusable components for:
 
@@ -65,7 +65,7 @@ Reusable components for:
 - System integration
 - Automation
 
-Open Ecosystems
+### Open Ecosystems
 
 Projects designed around:
 
@@ -76,11 +76,9 @@ Projects designed around:
 
 ---
 
-Technology
+## Technology
 
 Technology choices should serve engineering goals.
-
-Our projects use the right tools for the problem while emphasizing portability, performance, and maintainability.
 
 Common technologies include:
 
@@ -94,7 +92,7 @@ Common technologies include:
 
 ---
 
-Open Source
+## Open Source
 
 FlossWare is committed to open development and collaborative engineering.
 
@@ -111,10 +109,14 @@ Whether software is written by a human, an AI, or a collaboration between both, 
 
 ---
 
-Our Mission
+## Our Mission
 
 We are not building software around today's AI models.
 
 We are building reusable infrastructure that allows developers to adapt as technology evolves.
 
-«The models will change. The interfaces should endure.»
+---
+
+## Core Principle
+
+**The models will change. The interfaces should endure.**
