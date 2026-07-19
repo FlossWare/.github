@@ -91,7 +91,7 @@ Seven GA optimizers evolve model routing, team composition, RAG parameters, prom
 └─────────────────────────────┘
 ```
 
-For the complete architecture, see **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**.
+For the complete architecture, see the **[Architecture Guide](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**.
 
 ---
 
@@ -172,7 +172,7 @@ FlossWare consists of 37 repositories organized into AI infrastructure, Java inf
 
 | Document | Description |
 |----------|-------------|
-| **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)** | Complete system architecture (20+ pages) |
+| **[Architecture Guide](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)** | Complete system architecture (20+ pages) |
 | **[Design Philosophy](https://github.com/FlossWare/.github/blob/main/docs/philosophy.md)** | Design philosophy and engineering reasoning |
 | **[Orchestration](https://github.com/FlossWare/.github/tree/main/docs/architecture)** | Orchestration, consensus, fleet, routing |
 | **[Knowledge Pipeline](https://github.com/FlossWare/.github/tree/main/docs/knowledge)** | Scraping, chunking, embeddings, graph |
@@ -188,7 +188,7 @@ FlossWare consists of 37 repositories organized into AI infrastructure, Java inf
 **New to FlossWare?**
 
 1. Read this README
-2. Explore **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**
+2. Explore the **[Architecture Guide](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**
 3. Clone **[consensus-ai](https://github.com/FlossWare/consensus-ai)**
 4. Run the example workflows
 5. Explore the remaining repositories
