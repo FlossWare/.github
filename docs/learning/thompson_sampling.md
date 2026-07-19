@@ -151,7 +151,7 @@ two channels:
 1. **Manual registration:** An operator defines a new strategy configuration
    and registers it via the REST API.
 2. **GA evolution:** The genetic algorithm optimizer evolves new configurations
-   (see `docs/learning/genetic_algorithms.md`) and registers the fittest
+   (see [Genetic Algorithms](https://github.com/FlossWare/.github/blob/main/docs/learning/genetic_algorithms.md)) and registers the fittest
    individuals as new bandit arms.
 
 ---

@@ -147,7 +147,7 @@ npm test
 
 ## Code of Conduct
 
-This project follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/). All participants are expected to uphold a respectful and inclusive environment. See `CODE_OF_CONDUCT.md` in the repository root for the full text.
+This project follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/). All participants are expected to uphold a respectful and inclusive environment. See [CODE_OF_CONDUCT.md](https://github.com/FlossWare/.github/blob/main/CODE_OF_CONDUCT.md) for the full text.
 
 ---
 

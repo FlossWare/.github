@@ -2,6 +2,45 @@
 
 This document describes the web scraping subsystem: how documents enter the knowledge pipeline, the scraper architecture, fleet distribution, and integration with the downstream processing stages.
 
+## Why We Scrape
+
+Large language models are frozen at their training cutoff. They cannot know about a CVE
+published last week, a Kubernetes flag deprecated in the latest release, or a PostgreSQL
+optimization technique documented in a blog post six months after training ended. When a
+model encounters a question outside its training data, it does one of two things: refuses
+to answer, or confabulates -- producing a fluent, confident, and wrong response.
+
+Retrieval-Augmented Generation (RAG) solves this by injecting verified, up-to-date source
+material into the model's context window at query time. Instead of relying on parametric
+memory (what the model "learned" during training), the system retrieves relevant document
+chunks from a vector store and includes them as grounding context. The model generates its
+answer *from* the retrieved sources rather than *from* its training weights.
+
+This only works if the vector store contains high-quality, current, domain-specific
+content. That is what the scraping layer provides.
+
+**What scraping enables:**
+
+- **Factual grounding.** Every answer can cite specific documentation rather than relying
+  on parametric recall. A question about Terraform provider configuration returns the
+  actual Terraform docs, not a training-era approximation.
+- **Currency.** The corpus is continuously refreshable. When OpenWrt releases a new
+  version, re-running its scraper brings the knowledge base up to date without retraining
+  any model.
+- **Domain depth.** The 200+ models in the fleet were trained as generalists. Scraping
+  315,000+ documents across 12 specialized domains (chip design, embedded systems,
+  culinary science, etc.) gives them domain expertise they would not otherwise have.
+- **Hallucination reduction.** When the model's context window contains the actual
+  documentation, it has less reason to fabricate. Empirically, RAG-grounded responses
+  produce fewer factual errors than ungrounded ones, particularly on niche topics where
+  the model's training data is sparse.
+- **Auditability.** Every chunk in the vector store traces back to a source URL. When a
+  user questions an answer, the system can show exactly which documents informed it.
+
+Without the scraping layer, the system would be limited to whatever the models memorized
+during training -- static, aging, and unverifiable. With it, the system has a continuously
+growing, independently verifiable knowledge base that any model in the fleet can draw from.
+
 ## Overview
 
 The scraping layer is responsible for ingesting structured and semi-structured web content into the knowledge pipeline. It currently comprises 88+ scrapers covering 12 knowledge domains, producing a corpus of 315,000+ documents. Scrapers run as single-pass Python processes on fleet workers, enqueuing results into a Redis-backed pipeline via the controller's REST API.

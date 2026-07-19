@@ -133,7 +133,7 @@ The system maintains rigorous separation between what it measures and what it cl
 
 This principle extends to documentation. Components are labeled "UNVALIDATED" until independently verified. Metrics include confidence intervals. Claims about system behavior cite specific measurements rather than aspirational descriptions.
 
-**Deep dive:** See `docs/philosophy.md` for extended discussion of these principles, including worked examples of how each principle influenced specific design decisions.
+**Deep dive:** See [Design Philosophy](https://github.com/FlossWare/.github/blob/main/docs/philosophy.md) for extended discussion of these principles, including worked examples of how each principle influenced specific design decisions.
 
 ---
 
@@ -1249,8 +1249,32 @@ Rejection reason: Many code quality issues (security vulnerabilities, race condi
 
 ## 9. Knowledge Pipeline
 
-The knowledge pipeline is a 4-stage asynchronous system that transforms raw web content
-into searchable, graph-connected knowledge. Every stage is decoupled through Redis sorted
+### Why the Knowledge Pipeline Exists
+
+Large language models are frozen at their training cutoff. They cannot know about a CVE
+published last week, a framework flag deprecated in the latest release, or an optimization
+technique documented after training ended. When a model encounters a question outside its
+training data, it either refuses or confabulates -- producing a confident, wrong answer.
+
+Retrieval-Augmented Generation (RAG) addresses this by injecting verified source material
+into the model's context window at query time. Instead of relying on parametric memory
+(what the model "learned" during training), the system retrieves relevant document chunks
+from a vector store and includes them as grounding context. The model generates its answer
+*from* the retrieved sources rather than *from* its training weights.
+
+This only works if the vector store contains high-quality, current, domain-specific
+content. The knowledge pipeline is the machinery that builds and maintains that store:
+scraping fetches raw content, chunking splits it into context-window-sized pieces,
+embedding converts those pieces into vectors for similarity search, and graph sync
+captures the relationships between them. The end result is a continuously growing,
+independently verifiable knowledge base that any model in the 200+ model fleet can draw
+from -- reducing hallucinations, enabling domain expertise across 12 specialized fields,
+and making every answer auditable back to its source documentation.
+
+### Pipeline Architecture
+
+The pipeline is a 4-stage asynchronous system that transforms raw web content into
+searchable, graph-connected knowledge. Every stage is decoupled through Redis sorted
 sets, and every stage communicates exclusively through the REST API -- workers never touch
 the filesystem or database directly.
 

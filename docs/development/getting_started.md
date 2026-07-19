@@ -24,7 +24,7 @@ cd consensus-ai
 npm install
 ```
 
-Read `docs/architecture/ARCHITECTURE.md` for an overview of how the controller, fleet workers, pipelines, and datastores fit together.
+Read the [Architecture Guide](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md) for an overview of how the controller, fleet workers, pipelines, and datastores fit together.
 
 ---
 
