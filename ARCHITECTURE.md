@@ -440,21 +440,21 @@ The fleet consists of 9 nodes arranged in a controller-worker topology. One node
            │  HIGH TIER    │ │  MID TIER    │ │  LOW TIER    │
            │               │ │              │ │              │
            │ server-01     │ │ laptop-01    │ │ pi-01        │
-           │  8C, 16GB     │ │  4C, 31GB    │ │  ARM, low-pw │
-           │  x86_64       │ │  x86_64      │ │  armhf       │
+           │  8C, 16GB     │ │  4C, 31GB    │ │  ARM64, 1GB  │
+           │  x86_64       │ │  x86_64      │ │  aarch64     │
            │               │ │  (+ embed)   │ │              │
            │ server-02     │ │              │ │ pi-02        │
-           │  8C, 31GB     │ │ desktop-ap   │ │  ARM, 1GB    │
-           │  x86_64       │ │  1GB         │ │  armhf       │
-           │               │ │  x86_64      │ │              │
+           │  8C, 32GB     │ │ desktop-ap   │ │  ARM64, 1GB  │
+           │  x86_64       │ │  1GB         │ │  aarch64     │
+           │               │ │  armv7l      │ │              │
            │ server-03     │ │              │ └──────────────┘
-           │  8C, 31GB     │ │ server-ap    │
+           │  8C, 32GB     │ │ server-ap    │
            │  x86_64       │ │  1GB         │
-           │               │ │  x86_64      │
+           │               │ │  armv7l      │
            └───────────────┘ └──────────────┘
 ```
 
-**Hardware heterogeneity** is a deliberate design choice. The fleet includes machines ranging from 8-core, 31GB servers to 1GB ARM single-board computers. Every worker runs the same fleet executor script (`shared/fleet_executor.py`), which uses only Python standard library modules and routes all model requests through the proxy on aio-01. The executor's architecture-agnostic design means it functions identically on x86_64, ARM64, and ARMv7 without dependency installation.
+**Hardware heterogeneity** is a deliberate design choice. The fleet spans three CPU architectures: x86_64 (servers), ARM64/aarch64 (Raspberry Pis), and ARMv7/armhf (router-based workers running DD-WRT with Debian chroot). Every worker runs the same fleet executor script (`shared/fleet_executor.py`), which uses only Python standard library modules and routes all model requests through the proxy on aio-01. The executor's architecture-agnostic design means it functions identically on x86_64, ARM64, and ARMv7 without dependency installation. Fleet deployment is automated via Ansible with 11 roles (common, nfs, postgresql, redis, unified_api, monitoring, worker, ga_tools, scraping, orientdb, backup) and a 10-phase site playbook.
 
 ### 5.2 Why SSH Instead of Kubernetes
 

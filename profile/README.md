@@ -31,7 +31,7 @@ The system's signature pattern. Code changes pass through four phases -- **Revie
 Seven GA optimizers evolve model routing, team composition, RAG parameters, prompt templates, and workflow configurations using real execution history as fitness data. Best strategies feed into Thompson Sampling for real-time exploitation.
 
 ### Distributed Fleet
-9 nodes (1 controller + 8 workers) connected via SSH. Heterogeneous hardware. All 200+ models accessed via free-tier APIs. Circuit breakers, provider fallback, and rate limiting ensure reliability.
+9 nodes (1 controller + 8 workers) spanning three CPU architectures (x86_64, ARM64, ARMv7) connected via SSH. Deployed and managed via Ansible with 11 roles. All 200+ models accessed via free-tier APIs. Circuit breakers, provider fallback, and rate limiting ensure reliability.
 
 ---
 

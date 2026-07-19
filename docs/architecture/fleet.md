@@ -24,16 +24,16 @@ The fleet is a heterogeneous cluster of 9 machines that execute tasks in paralle
         |          |             |             |           |
   +-----+----+ +--+-------+ +--+-------+ +---+------+ +--+-------+
   | server-01| | server-02| | server-03| | laptop-01| | laptop-02|
-  |  8C/15GB | |  8C/31GB | |  8C/31GB | |  4C/31GB | |  4C/31GB |
-  |  Worker   | |  Worker   | |  Worker   | |  Worker + | |  Worker   |
-  |          | |          | |          | |  Embeds   | |          |
+  |  8C/16GB | |  8C/32GB | |  8C/32GB | |  4C/31GB | |  4C/31GB |
+  |  x86_64  | |  x86_64  | |  x86_64  | |  x86_64  | |  x86_64  |
+  |  Worker  | |  Worker  | |  Worker  | | Worker+  | |  Worker  |
+  |          | |          | |          | | Embeds   | |          |
   +----------+ +----------+ +----------+ +----------+ +----------+
-        |          |             |
-        +----------+-------------+
-        |
-  +-----+----+ +----------+ +----------+ +----------+
+
+  +----------+ +----------+ +----------+ +----------+
   | desktop-ap| | server-ap| |  pi-01   | |  pi-02   |
   |   1GB     | |   1GB    | |  1GB     | |  1GB     |
+  |  armv7l   | |  armv7l  | | aarch64  | | aarch64  |
   |  Worker   | |  Worker  | |  Worker  | |  Worker  |
   |  (light)  | |  (light) | |  (light) | |  (light) |
   +----------+ +----------+ +----------+ +----------+
@@ -83,11 +83,12 @@ Workers execute tasks dispatched by the controller via SSH. They make outbound A
 
 Not all workers are equal. The fleet is divided into tiers based on hardware capability.
 
-| Tier | Nodes | CPU | RAM | Best For |
-|------|-------|-----|-----|----------|
-| Heavy | server-01, server-02, server-03 | 8 cores | 15-31 GB | Parallel API calls, large context, multi-step workflows |
-| Medium | laptop-01, laptop-02 | 4 cores | 31 GB | Embedding generation (exclusive), general tasks |
-| Light | desktop-ap, server-ap, pi-01, pi-02 | 1-2 cores | 1 GB | Simple API calls, classification, fast-path consensus |
+| Tier | Nodes | CPU | RAM | Arch | Best For |
+|------|-------|-----|-----|------|----------|
+| Heavy | server-01, server-02, server-03 | 8 cores | 16-32 GB | x86_64 | Parallel API calls, large context, multi-step workflows |
+| Medium | laptop-01, laptop-02 | 4 cores | 31 GB | x86_64 | Embedding generation (exclusive), general tasks |
+| Light | pi-01, pi-02 | 4 cores | 1 GB | aarch64 (ARM64) | Simple API calls, classification, fast-path consensus |
+| Light | desktop-ap, server-ap | 4 cores | 1 GB | armv7l (armhf) | Simple API calls, classification, fast-path consensus |
 
 The task dispatcher considers worker tier when assigning tasks. Code review (which requires holding multiple file contents in memory for context) goes to heavy-tier workers. Simple classification tasks go to light-tier workers. Embedding generation goes exclusively to medium-tier workers (laptop-01 and laptop-02) because sentence-transformers requires 2-4 GB of RAM for model loading.
 
@@ -117,7 +118,7 @@ Host *
 
 ### Why SSH Instead of Kubernetes
 
-The fleet is heterogeneous: servers with 8 cores and 31 GB RAM alongside Raspberry Pis with 1 GB RAM. Kubernetes assumes a relatively homogeneous cluster and adds significant overhead for container scheduling, pod networking, service mesh, and control plane operation.
+The fleet is heterogeneous: x86_64 servers with 8 cores and 16-32 GB RAM alongside ARM64 Raspberry Pis and ARMv7 router-based workers with 1 GB RAM. Kubernetes assumes a relatively homogeneous cluster and adds significant overhead for container scheduling, pod networking, service mesh, and control plane operation.
 
 SSH-based distribution has several advantages for this environment:
 
@@ -164,6 +165,52 @@ Independent of provider-level circuit breakers, each worker node has its own cir
 - **Maximum cooldown:** 5 minutes (exponential backoff)
 
 A worker circuit breaker trip does not affect other workers. The orchestrator simply stops dispatching to that node until it recovers.
+
+---
+
+## Deployment Automation (Ansible)
+
+Fleet deployment is automated via Ansible with 11 roles and a 10-phase site playbook.
+
+**Inventory structure:**
+
+The Ansible inventory organizes the fleet by CPU architecture, which determines package availability and binary compatibility:
+
+```yaml
+workers:
+  children:
+    x86_workers:       # server-01, server-02, server-03
+    arm64_workers:     # pi-01, pi-02 (aarch64)
+    armv7_workers:     # desktop-ap, server-ap (armhf)
+```
+
+**Roles:**
+
+| Role | Target | Purpose |
+|------|--------|---------|
+| `common` | All nodes | Baseline packages, SSH config, user setup |
+| `nfs` | Controller (server), workers (client) | Shared filesystem |
+| `postgresql` | Controller | PostgreSQL + pgvector, schema migrations |
+| `redis` | Controller | Redis queue and cache |
+| `unified_api` | Controller | Flask API + Gunicorn |
+| `monitoring` | All nodes, controller, Grafana host | node_exporter, Prometheus, Alertmanager, Grafana |
+| `worker` | Workers | Worker runtime, fleet executor |
+| `ga_tools` | Controller | Genetic algorithm optimizers |
+| `scraping` | Workers | Scraper deployment and configuration |
+| `orientdb` | Controller | OrientDB Docker container |
+| `backup` | Controller | Automated database backups |
+
+**Deployment:**
+
+```bash
+# Full fleet deployment (all 10 phases)
+ansible-playbook -i inventory/hosts.yml playbooks/site.yml
+
+# Targeted deployment by tag
+ansible-playbook -i inventory/hosts.yml playbooks/site.yml --tags workers
+ansible-playbook -i inventory/hosts.yml playbooks/site.yml --tags scraping
+ansible-playbook -i inventory/hosts.yml playbooks/site.yml --tags monitoring
+```
 
 ---
 

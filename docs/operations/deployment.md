@@ -1,11 +1,34 @@
 # Deployment Guide
 
-This guide covers deploying every component of the distributed LLM orchestration framework: the controller API, fleet workers, scraper pipelines, embedding workers, and backing datastores.
+This guide covers deploying every component of the distributed LLM orchestration framework: the controller API, fleet workers, scraper pipelines, embedding workers, and backing datastores. Deployment is automated via Ansible.
+
+---
+
+## Automated Deployment (Ansible)
+
+The preferred deployment method uses the Ansible playbooks in `ansible/`. The inventory organizes the fleet by CPU architecture (x86_64, ARM64/aarch64, ARMv7/armhf).
+
+```bash
+# Full fleet deployment (all 10 phases)
+ansible-playbook -i ansible/inventory/hosts.yml ansible/playbooks/site.yml
+
+# Deploy only workers
+ansible-playbook -i ansible/inventory/hosts.yml ansible/playbooks/site.yml --tags workers
+
+# Deploy only scrapers
+ansible-playbook -i ansible/inventory/hosts.yml ansible/playbooks/site.yml --tags scraping
+
+# Deploy only monitoring stack
+ansible-playbook -i ansible/inventory/hosts.yml ansible/playbooks/site.yml --tags monitoring
+```
+
+The site playbook runs 10 phases in order: common baseline, NFS, PostgreSQL, Redis, REST API, monitoring, workers, GA tools, scraping, backups.
 
 ---
 
 ## Prerequisites
 
+- **Ansible 2.14+** on the control machine (laptop-01)
 - **Network access** to the orchestrator API (controller node, port 5000)
 - **SSH access** to fleet worker nodes (key-based authentication, user `claude`)
 - **PostgreSQL client** (optional, for direct schema inspection)
