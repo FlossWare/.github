@@ -1605,10 +1605,6 @@ relationships are a performance optimization for traversal queries, not a source
 PostgreSQL holds the canonical data; OrientDB can always be rebuilt from it via
 `POST /api/graph/load-from-postgres`.
 
-**Limitation.** Two stale Neo4j client files remain in the codebase (`shared/workflow-graph-sync.js`,
-`shared/neo4j-realtime-sync.cjs`). They import `neo4j-driver` and silently fail at
-runtime since Neo4j does not run anywhere. These are technical debt awaiting cleanup.
-
 ---
 
 ## 10. Vector Search
@@ -1913,11 +1909,10 @@ SELECT FROM (
 SELECT shortestPath(#9:0, #9:5, 'BOTH', 'CONNECTED_TO')
 ```
 
-**Why OrientDB over Neo4j.** Neo4j was the original choice (and stale Neo4j client code
-remains in the codebase). It was replaced due to persistent data loss issues in Docker
-deployments -- OrientDB's built-in REST API eliminated the need for a language-specific
-driver, and its multi-model capability (document + graph + key/value in one engine)
-simplified the deployment.
+**Why OrientDB over Neo4j.** Neo4j was the original choice. It was replaced due to
+persistent data loss issues in Docker deployments. OrientDB's built-in REST API
+eliminated the need for a language-specific driver, and its multi-model capability
+(document + graph + key/value in one engine) simplified the deployment.
 
 **Why not just PostgreSQL for graph queries.** Consider finding all documents within 3
 hops of a given document. In SQL:
