@@ -1,63 +1,75 @@
 # FlossWare
 
-**Distributed AI orchestration. Multi-model consensus. Evolutionary optimization.**
+**AI-powered engineering. Multi-model collaboration. Software evolution.**
 
-FlossWare is an open-source platform for orchestrating independent AI systems at scale. Rather than relying on a single language model, FlossWare coordinates hundreds of AI models, distributed workers, and knowledge services through consensus, adversarial verification, and evolutionary optimization.
+FlossWare builds and evolves complex software using coordinated AI engineering systems. Rather than prompting a single model and shipping the result, FlossWare treats 200+ language models as engineering tools -- orchestrated through consensus, adversarial verification, and evolutionary optimization -- to produce software that no single model could build or review alone.
+
+The AI is the engineering method. The software is the product.
 
 ---
 
 ## The Problem
 
-Asking one AI model a question and trusting the answer is a single point of failure. Every model has blind spots, biases, and failure modes. The larger the model, the more confidently it can be wrong.
+Software built by one AI model inherits that model's blind spots. Code reviewed by the same model that wrote it confirms its own assumptions. Parameters tuned by hand reflect the operator's guesses, not measured outcomes.
 
-## Our Solution
+## How FlossWare Builds Software
 
-Instead of trusting one model, **orchestrate many**. FlossWare coordinates 200+ models from 8+ providers (Anthropic, OpenAI, Google, Groq, Cerebras, DeepSeek, and others) across a distributed fleet. Models review each other's work through adversarial panels with zero overlap. Genetic algorithms evolve better configurations over time. The result is designed to produce more reliable results than traditional single-model workflows through independent verification and multi-model consensus.
+Instead of trusting one model, FlossWare coordinates 200+ models from 8+ providers (Anthropic, OpenAI, Google, Groq, Cerebras, DeepSeek, and others) across a distributed fleet. Models write code, then independent panels review it with zero overlap. Separate panels adversarially challenge those reviews. Genetic algorithms evolve better configurations over time. The result is software built through independent verification at every stage.
 
 ---
 
-## Why FlossWare?
+## What Gets Built
 
-Most AI frameworks focus on prompting a single model.
+The AI engineering systems described here produce real software. These are not demos or chatbot wrappers -- they are standalone projects that solve specific problems:
 
-FlossWare focuses on orchestrating many independent models.
+| Project | What It Does |
+|---------|-------------|
+| **[PxeOS](https://github.com/FlossWare/PxeOS)** | Cross-OS PXE boot provisioning (Linux, BSD, Windows) |
+| **[VirtOS](https://github.com/FlossWare/VirtOS)** | Minimal virtualization OS based on Tiny Core Linux |
+| **[consensus-ai](https://github.com/FlossWare/consensus-ai)** | Multi-AI orchestration library with 5 consensus strategies |
+| **[knowledge-ai](https://github.com/FlossWare/knowledge-ai)** | Universal knowledge ingestion from any documentation format |
+| **[skills-ai](https://github.com/FlossWare/skills-ai)** | Executable workflows for the AI ecosystem |
+| **[commons-java](https://github.com/FlossWare/commons-java)** | Shared utilities for SOAP clients, string operations, file handling |
+| **[platform-java](https://github.com/FlossWare/platform-java)** | Multi-application isolation -- classloaders, thread pools, security |
+| **[curses-java](https://github.com/FlossWare/curses-java)** | Terminal UI library with 29 AWT-like widgets and ncurses backend |
 
-The value is not any individual model, but the system that coordinates them through consensus, adversarial review, knowledge retrieval, and evolutionary optimization. The architecture treats AI models as interchangeable components while continuously improving how they are used.
+These projects are written, reviewed, and evolved using the multi-model engineering pipeline. The AI doesn't just assist -- it writes the code, reviews its own work through adversarial panels, and evolves its approach based on execution history.
 
 ---
 
 ## Engineering Philosophy
 
-**Orchestration, not training.** The models are pre-trained and used as-is via API. All improvements come from smarter routing, better team composition, and evolved configurations.
+**AI models are components, not the product.** The 200+ models are interchangeable tools in an engineering pipeline. When a model improves or a provider changes pricing, the system routes around it. No single model is essential.
 
-**Independence over agreement.** Review panels share zero models with meta-review panels. External AI reviewers operate outside the orchestrator entirely. Quality comes from independent perspectives, not consensus theater.
+**Consensus and orchestration are engineering tools.** Multi-model consensus exists to catch bugs that single-model review misses. Adversarial verification exists to prevent self-confirmation. These are quality engineering practices implemented through AI, not AI features implemented for their own sake.
+
+**The goal is better software, not better chatbots.** Every system described here -- scraping, embedding, routing, evolution -- serves one purpose: produce software that works correctly and survives independent scrutiny.
 
 **Evolution over configuration.** Don't hand-tune parameters. Let genetic algorithms search the configuration space using real execution history as fitness data.
 
 **Interfaces over implementations.** Every component communicates through REST APIs. The orchestrator doesn't know if a worker is a server or a Raspberry Pi. Any component can be replaced without touching the others.
 
-**Provider independence.** No vendor lock-in. If a provider goes down or raises prices, the system routes to alternatives automatically. The models will change; the orchestration endures.
-
 For the full design philosophy, see **[Design Philosophy](https://github.com/FlossWare/.github/blob/main/docs/philosophy.md)**.
 
 ---
 
-## Core Capabilities
+## How the Engineering Pipeline Works
 
-### Multi-AI Consensus
-Query 3-8 models simultaneously. An arbiter synthesizes the best answer with confidence scoring. Thompson Sampling learns which models excel at which tasks and routes accordingly.
+### Multi-AI Code Review
 
-### Adversarial Review Pipeline
-The system's signature pattern. Code changes pass through four phases -- **Review**, **Meta-Review**, **Fix**, **Verify** -- where review and meta-review panels share **zero models** to prevent self-confirmation bias. Each phase uses a different arbiter. External reviewers (Grok, ChatGPT, Notebook LLM) provide independent adversarial critique outside the orchestrator's ecosystem.
+The signature engineering practice. Code changes pass through four phases -- **Review**, **Meta-Review**, **Fix**, **Verify** -- where review and meta-review panels share **zero models** to prevent self-confirmation bias. Each phase uses a different arbiter. External reviewers (Grok, ChatGPT, Notebook LLM) provide independent adversarial critique outside the orchestrator entirely.
 
-### Knowledge Pipeline
-88+ scrapers collect documents across 12 domains. A 4-stage async pipeline (store, chunk, embed, graph) converts raw content into searchable vector embeddings and graph-linked knowledge. 315,000+ documents, 705,000+ embeddings, 0.4ms vector search.
+### Knowledge-Grounded Development
 
-### Genetic Algorithm Evolution
-Seven GA optimizers evolve model routing, team composition, RAG parameters, prompt templates, and workflow configurations using real execution history as fitness data. Best strategies feed into Thompson Sampling for real-time exploitation.
+88+ scrapers collect documents across 12+ domains. A 4-stage async pipeline (store, chunk, embed, graph) converts raw content into searchable vector embeddings and graph-linked knowledge. This grounds AI-generated code in real documentation -- 315,000+ documents, 705,000+ embeddings, 0.4ms vector search -- reducing hallucination and ensuring generated code follows actual API patterns.
 
-### Distributed Fleet
-9 nodes (1 controller + 8 workers) spanning three CPU architectures (x86_64, ARM64, ARMv7) connected via SSH. Deployed and managed via Ansible with 11 roles. All 200+ models accessed via free-tier APIs. Circuit breakers, provider fallback, and rate limiting ensure reliability.
+### Evolutionary Optimization
+
+Seven GA optimizers evolve model routing, team composition, RAG parameters, prompt templates, and workflow configurations using real execution history as fitness data. The system doesn't stay static -- it measures what works and evolves toward better outcomes.
+
+### Distributed Execution
+
+9 nodes (1 controller + 8 workers) spanning three CPU architectures (x86_64, ARM64, ARMv7) connected via SSH. All 200+ models accessed via free-tier APIs. Circuit breakers, provider fallback, and rate limiting ensure the engineering pipeline stays operational.
 
 ---
 
@@ -97,20 +109,15 @@ For the complete architecture, see the **[Architecture Guide](https://github.com
 
 ## Repository Map
 
-FlossWare consists of 37 repositories organized into AI infrastructure, Java infrastructure, systems software, applications, and documentation.
+FlossWare consists of 37 repositories. The AI engineering pipeline builds and maintains software across all of them.
 
-### Flagship Projects
+### AI Engineering Infrastructure
 
 | Repository | Description |
 |------------|-------------|
 | **[consensus-ai](https://github.com/FlossWare/consensus-ai)** | Multi-AI orchestration library with 5 consensus strategies |
 | **[knowledge-ai](https://github.com/FlossWare/knowledge-ai)** | Universal knowledge ingestion from any documentation format |
 | **[skills-ai](https://github.com/FlossWare/skills-ai)** | Executable workflows for the AI ecosystem |
-
-### Core AI Libraries
-
-| Repository | Description |
-|------------|-------------|
 | **[vectordb-ai](https://github.com/FlossWare/vectordb-ai)** | Universal vector database adapter -- 9 backends, no vendor lock-in |
 | **[semantic-search-ai](https://github.com/FlossWare/semantic-search-ai)** | Hybrid search, reranking, filtering for AI applications |
 | **[netbeans-plugins](https://github.com/FlossWare/netbeans-plugins)** | NetBeans IDE plugins for Claude, Gemini, and ChatGPT |
@@ -139,7 +146,7 @@ FlossWare consists of 37 repositories organized into AI infrastructure, Java inf
 | **[diskwipe-java](https://github.com/FlossWare/diskwipe-java)** | Secure disk space wiping with zero-fill operations |
 | **[build-tools](https://github.com/FlossWare/build-tools)** | Automated code quality and refactoring tools |
 
-### Systems and DevOps
+### Systems Software
 
 | Repository | Description |
 |------------|-------------|
@@ -213,8 +220,8 @@ FlossWare is open to contributions from developers, AI practitioners, and infras
 
 ## Core Principle
 
-**The models will change. The orchestration endures.**
+**The models will change. The software endures.**
 
 ---
 
-*Built with multi-AI consensus. Reviewed by adversarial panels. Evolved by genetic algorithms.*
+*Built with multi-model engineering. Reviewed by adversarial panels. Evolved by genetic algorithms.*
