@@ -2,7 +2,7 @@
 
 **Distributed AI orchestration. Multi-model consensus. Evolutionary optimization.**
 
-FlossWare is an open-source engineering organization building infrastructure for the multi-AI era. Our flagship project is a distributed orchestration framework that coordinates 200+ AI models across a fleet of nodes, using adversarial verification and genetic algorithms to deliver results no single model can match.
+FlossWare is an open-source platform for orchestrating independent AI systems at scale. Rather than relying on a single language model, FlossWare coordinates hundreds of AI models, distributed workers, and knowledge services through consensus, adversarial verification, and evolutionary optimization.
 
 ---
 
@@ -12,7 +12,33 @@ Asking one AI model a question and trusting the answer is a single point of fail
 
 ## Our Solution
 
-Instead of trusting one model, **orchestrate many**. FlossWare coordinates 200+ models from 8+ providers (Anthropic, OpenAI, Google, Groq, Cerebras, DeepSeek, and others) across a distributed fleet. Models review each other's work through adversarial panels with zero overlap. Genetic algorithms evolve better configurations over time. The result: higher quality, lower cost, and continuous improvement without retraining a single model.
+Instead of trusting one model, **orchestrate many**. FlossWare coordinates 200+ models from 8+ providers (Anthropic, OpenAI, Google, Groq, Cerebras, DeepSeek, and others) across a distributed fleet. Models review each other's work through adversarial panels with zero overlap. Genetic algorithms evolve better configurations over time. The result is designed to produce more reliable results than traditional single-model workflows through independent verification and multi-model consensus.
+
+---
+
+## Why FlossWare?
+
+Most AI frameworks focus on prompting a single model.
+
+FlossWare focuses on orchestrating many independent models.
+
+The value is not any individual model, but the system that coordinates them through consensus, adversarial review, knowledge retrieval, and evolutionary optimization. The architecture treats AI models as interchangeable components while continuously improving how they are used.
+
+---
+
+## Engineering Philosophy
+
+**Orchestration, not training.** The models are pre-trained and used as-is via API. All improvements come from smarter routing, better team composition, and evolved configurations.
+
+**Independence over agreement.** Review panels share zero models with meta-review panels. External AI reviewers operate outside the orchestrator entirely. Quality comes from independent perspectives, not consensus theater.
+
+**Evolution over configuration.** Don't hand-tune parameters. Let genetic algorithms search the configuration space using real execution history as fitness data.
+
+**Interfaces over implementations.** Every component communicates through REST APIs. The orchestrator doesn't know if a worker is a server or a Raspberry Pi. Any component can be replaced without touching the others.
+
+**Provider independence.** No vendor lock-in. If a provider goes down or raises prices, the system routes to alternatives automatically. The models will change; the orchestration endures.
+
+For the full design philosophy, see **[Design Philosophy](https://github.com/FlossWare/.github/blob/main/docs/philosophy.md)**.
 
 ---
 
@@ -45,47 +71,46 @@ Seven GA optimizers evolve model routing, team composition, RAG parameters, prom
 ┌──────────────▼──────────────┐
 │   Orchestrator (Flask API)  │
 │  Routing ─ Consensus ─ GA   │
-└───────┬─────────────┬───────┘
-        │ SSH         │ API
-┌───────▼───────┐ ┌───▼────────┐
-│ Worker Fleet  │ │ 200+ LLMs  │
-│ (8 nodes)     │ │ (8+ provs) │
-└───────────────┘ └────────────┘
-        │
-┌───────▼─────────────────────┐
+└──────┬──────────┬───────────┘
+       │ SSH      │ API
+┌──────▼──────┐ ┌─▼───────────┐
+│ Worker Fleet│ │ 200+ LLMs   │
+│ (8 nodes)   │ │ (8+ provs)  │
+└──────┬──────┘ └─────────────┘
+       │
+┌──────▼──────────────────────┐
+│   Knowledge Platform        │
 │ PostgreSQL ─ Redis ─ OrientDB│
+│ Vectors ─ Queues ─ Graph    │
+└──────┬──────────────────────┘
+       │
+┌──────▼──────────────────────┐
+│   Learning Engine           │
+│ Thompson Sampling ─ GA ─    │
+│ Feedback Loop Optimizer     │
 └─────────────────────────────┘
 ```
 
-For the complete architecture, see **[ARCHITECTURE.md](../ARCHITECTURE.md)**.
-
----
-
-## Engineering Philosophy
-
-**Orchestration, not training.** The models are pre-trained and used as-is via API. All improvements come from smarter routing, better team composition, and evolved configurations.
-
-**Independence over agreement.** Review panels share zero models with meta-review panels. External AI reviewers operate outside the orchestrator entirely. Quality comes from independent perspectives, not consensus theater.
-
-**Evolution over configuration.** Don't hand-tune parameters. Let genetic algorithms search the configuration space using real execution history as fitness data.
-
-**Interfaces over implementations.** Every component communicates through REST APIs. The orchestrator doesn't know if a worker is a server or a Raspberry Pi. Any component can be replaced without touching the others.
-
-**Provider independence.** No vendor lock-in. If a provider goes down or raises prices, the system routes to alternatives automatically. The models will change; the orchestration endures.
-
-For the full design philosophy, see **[docs/philosophy.md](../docs/philosophy.md)**.
+For the complete architecture, see **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**.
 
 ---
 
 ## Repository Map
 
-### AI Infrastructure
+FlossWare consists of 37 repositories organized into AI infrastructure, Java infrastructure, systems software, applications, and documentation.
+
+### Flagship Projects
 
 | Repository | Description |
 |------------|-------------|
 | **[consensus-ai](https://github.com/FlossWare/consensus-ai)** | Multi-AI orchestration library with 5 consensus strategies |
 | **[knowledge-ai](https://github.com/FlossWare/knowledge-ai)** | Universal knowledge ingestion from any documentation format |
 | **[skills-ai](https://github.com/FlossWare/skills-ai)** | Executable workflows for the AI ecosystem |
+
+### Core AI Libraries
+
+| Repository | Description |
+|------------|-------------|
 | **[vectordb-ai](https://github.com/FlossWare/vectordb-ai)** | Universal vector database adapter -- 9 backends, no vendor lock-in |
 | **[semantic-search-ai](https://github.com/FlossWare/semantic-search-ai)** | Hybrid search, reranking, filtering for AI applications |
 | **[netbeans-plugins](https://github.com/FlossWare/netbeans-plugins)** | NetBeans IDE plugins for Claude, Gemini, and ChatGPT |
@@ -147,18 +172,26 @@ For the full design philosophy, see **[docs/philosophy.md](../docs/philosophy.md
 
 | Document | Description |
 |----------|-------------|
-| **[ARCHITECTURE.md](../ARCHITECTURE.md)** | Complete system architecture (20+ pages) |
-| **[docs/philosophy.md](../docs/philosophy.md)** | Design philosophy and engineering reasoning |
-| **[docs/architecture/](../docs/architecture/)** | Orchestration, consensus, fleet, routing |
-| **[docs/knowledge/](../docs/knowledge/)** | Scraping, chunking, embeddings, graph |
-| **[docs/databases/](../docs/databases/)** | PostgreSQL, Redis, OrientDB |
-| **[docs/learning/](../docs/learning/)** | Thompson Sampling, genetic algorithms |
-| **[docs/operations/](../docs/operations/)** | Deployment, monitoring, scaling |
-| **[docs/development/](../docs/development/)** | Getting started, contributing, coding standards |
+| **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)** | Complete system architecture (20+ pages) |
+| **[Design Philosophy](https://github.com/FlossWare/.github/blob/main/docs/philosophy.md)** | Design philosophy and engineering reasoning |
+| **[Orchestration](https://github.com/FlossWare/.github/tree/main/docs/architecture)** | Orchestration, consensus, fleet, routing |
+| **[Knowledge Pipeline](https://github.com/FlossWare/.github/tree/main/docs/knowledge)** | Scraping, chunking, embeddings, graph |
+| **[Databases](https://github.com/FlossWare/.github/tree/main/docs/databases)** | PostgreSQL, Redis, OrientDB |
+| **[Learning](https://github.com/FlossWare/.github/tree/main/docs/learning)** | Thompson Sampling, genetic algorithms |
+| **[Operations](https://github.com/FlossWare/.github/tree/main/docs/operations)** | Deployment, monitoring, scaling |
+| **[Development](https://github.com/FlossWare/.github/tree/main/docs/development)** | Getting started, contributing, coding standards |
 
 ---
 
 ## Getting Started
+
+**New to FlossWare?**
+
+1. Read this README
+2. Explore **[ARCHITECTURE.md](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md)**
+3. Clone **[consensus-ai](https://github.com/FlossWare/consensus-ai)**
+4. Run the example workflows
+5. Explore the remaining repositories
 
 ```bash
 # Clone the orchestration framework
@@ -168,13 +201,13 @@ git clone https://github.com/FlossWare/consensus-ai.git
 git clone https://github.com/FlossWare/.github.git
 ```
 
-See **[docs/development/getting_started.md](../docs/development/getting_started.md)** for the full setup guide.
+See **[Getting Started](https://github.com/FlossWare/.github/blob/main/docs/development/getting_started.md)** for the full setup guide.
 
 ---
 
 ## Contributing
 
-FlossWare is open to contributions from developers, AI practitioners, and infrastructure engineers. See **[docs/development/contributing.md](../docs/development/contributing.md)** for guidelines.
+FlossWare is open to contributions from developers, AI practitioners, and infrastructure engineers. See **[Contributing](https://github.com/FlossWare/.github/blob/main/docs/development/contributing.md)** for guidelines.
 
 ---
 
