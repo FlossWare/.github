@@ -6,7 +6,7 @@
 
 ## What This Is
 
-A production distributed orchestration system that coordinates **200+ free LLM models** across a **9-node fleet** to deliver higher-quality results than any single model can achieve alone. Instead of asking one AI and trusting its answer, this system asks many, cross-checks their work, and evolves better strategies over time using genetic algorithms.
+A distributed orchestration system that coordinates **200+ free LLM models** across a **9-node fleet** to deliver higher-quality results than any single model can achieve alone. Instead of asking one AI and trusting its answer, this system asks many, cross-checks their work, and evolves better strategies over time using genetic algorithms.
 
 **Core idea:** Multiple independent AI models reviewing each other's work, with adversarial validation to filter out false positives, and evolutionary optimization to continuously improve the process.
 
@@ -228,8 +228,8 @@ The knowledge pipeline converts raw web content into searchable, embeddable, gra
          ▼
 ┌────────────────────┐
 │   Stage 1: STORE   │  Validate, deduplicate (MD5 hash)
-│   Write raw JSON   │  Atomic write (tmp file then rename)
-│   to NFS storage   │  Chain to chunk queue on completion
+│   POST /store via  │  REST API handles persistence
+│   REST API         │  Chain to chunk queue on completion
 └────────┬───────────┘
          │ Automatic pipeline chaining
          ▼
@@ -636,7 +636,7 @@ Every component communicates through REST APIs. The orchestrator doesn't know wh
 
 ### Validate Architecture Through Working Software
 
-Every pattern described here is running in production. The review loop has processed thousands of code changes. The GA optimizers have evolved through hundreds of generations. The scraping pipeline has ingested 315,000+ documents. This isn't a whitepaper -- it's a field report.
+Every pattern described here is operational. The review loop has processed thousands of code changes. The GA optimizers have evolved through hundreds of generations. The scraping pipeline has ingested 315,000+ documents. This isn't a whitepaper -- it's a field report.
 
 ---
 
