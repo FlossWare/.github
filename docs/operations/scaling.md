@@ -108,7 +108,7 @@ Embedding is typically the pipeline's compute bottleneck. Scale by adding dedica
 The ingestion pipeline has four stages. Each has a different scaling profile:
 
 ```
-Scraping --> Chunking --> Embedding --> Graph Insertion
+Ingest --> Chunk --> Embed --> Graph
 ```
 
 ### Stage Characteristics
@@ -124,7 +124,7 @@ Scraping --> Chunking --> Embedding --> Graph Insertion
 
 ```bash
 # Check queue depths across all stages
-curl http://aio-01:5000/queue/status
+curl http://aio-01:5000/pipeline/queues/stats
 ```
 
 Interpretation:
@@ -142,13 +142,13 @@ As a reference point for capacity planning:
 
 | Metric        | Count     |
 |---------------|-----------|
-| Documents     | 315,000+  |
-| Chunks        | 705,000+  |
-| Embeddings    | 705,000+  |
-| DB Tables     | 226       |
+| Documents     | 381,000+  |
+| Chunks        | 3,900,000+|
+| Embeddings    | 487,000+  |
+| URLs Tracked  | 119,000+  |
 | Fleet Nodes   | 9         |
 | API Models    | 200+      |
-| Scrapers      | 60+       |
+| Scrapers      | 116+      |
 
 ---
 

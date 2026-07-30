@@ -28,7 +28,7 @@ content. That is what the scraping layer provides.
   version, re-running its scraper brings the knowledge base up to date without retraining
   any model.
 - **Domain depth.** The 200+ models in the fleet were trained as generalists. Scraping
-  315,000+ documents across 12 specialized domains (chip design, embedded systems,
+  381,000+ documents across 15+ specialized domains (chip design, embedded systems,
   culinary science, etc.) gives them domain expertise they would not otherwise have.
 - **Hallucination reduction.** When the model's context window contains the actual
   documentation, it has less reason to fabricate. Empirically, RAG-grounded responses
@@ -43,7 +43,7 @@ growing, independently verifiable knowledge base that any model in the fleet can
 
 ## Overview
 
-The scraping layer is responsible for ingesting structured and semi-structured web content into the knowledge pipeline. It currently comprises 88+ scrapers covering 12 knowledge domains, producing a corpus of 315,000+ documents. Scrapers run as single-pass Python processes on fleet workers, enqueuing results into a Redis-backed pipeline via the controller's REST API.
+The scraping layer is responsible for ingesting structured and semi-structured web content into the knowledge pipeline. It currently comprises 116+ scrapers covering 15+ knowledge domains, producing a corpus of 381,000+ documents. Scrapers run as single-pass Python processes on fleet workers, enqueuing results into a Redis-backed pipeline via the controller's REST API.
 
 ## Knowledge Domains
 

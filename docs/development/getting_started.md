@@ -107,7 +107,7 @@ Scrapers feed documents into the ingestion pipeline. To add one:
 1. Create a new Python file in `scrapers/`:
 
 ```python
-from base_scraper import BaseScraper
+from scraper_base import BaseScraper
 
 class MyDocsScraper(BaseScraper):
     """Scraper for MyDocs documentation site."""
@@ -228,7 +228,7 @@ These are the endpoints you will use most often during development:
 
 ## Next Steps
 
-- Read the [Architecture Guide](../architecture/ARCHITECTURE.md) for the full system design.
+- Read the [Architecture Guide](https://github.com/FlossWare/.github/blob/main/ARCHITECTURE.md) for the full system design.
 - Read the [Contributing Guide](contributing.md) before submitting changes.
 - Read the [Coding Standards](coding_standards.md) for code conventions.
 - Explore existing workflows in `workflows/` for patterns to follow.
