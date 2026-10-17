@@ -49,7 +49,7 @@ FlossWare systems follow these core ideas:
 
 ## Documentation
 
-The authoritative normative standards and architecture decisions lives in:
+Authoritative normative standards and architecture decisions live in:
 
 - [FlossWare/standards](https://github.com/FlossWare/standards) — normative rules and architecture standards
 - [FlossWare/axium](https://github.com/FlossWare/axium) — canonical non-code knowledge corpus
