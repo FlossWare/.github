@@ -8,7 +8,7 @@ FlossWare builds reusable engineering foundations and reference implementations 
 
 | Repository | Purpose |
 |---|---|
-| [engineering-standards](https://github.com/FlossWare/engineering-standards) | Architecture decisions, engineering principles, and development standards |
+| [standards](https://github.com/FlossWare/standards) | Authoritative FlossWare-wide standards and architecture decisions |
 | [commons-java](https://github.com/FlossWare/commons-java) | Shared Java foundation libraries |
 | [tftp-os](https://github.com/FlossWare/tftp-os) | Reference implementation for infrastructure provisioning and automation |
 
@@ -49,12 +49,13 @@ FlossWare systems follow these core ideas:
 
 ## Documentation
 
-The canonical architecture documentation lives in:
+The authoritative normative standards and architecture decisions lives in:
 
-- [FlossWare/engineering-standards](https://github.com/FlossWare/engineering-standards)
+- [FlossWare/standards](https://github.com/FlossWare/standards) — normative rules and architecture standards
+- [FlossWare/axium](https://github.com/FlossWare/axium) — canonical non-code knowledge corpus
 
 See the repository ADRs for detailed architectural decisions.
 
 ## Contributing
 
-Contributions should align with the FlossWare engineering standards. Projects should favor clarity, composability, and maintainable open designs over unnecessary complexity.
+Contributions should align with the FlossWare standards. Projects should favor clarity, composability, and maintainable open designs over unnecessary complexity.
