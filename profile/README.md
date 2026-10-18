@@ -14,6 +14,17 @@ FlossWare is a collection of software projects and shared foundations. We focus 
 
 These repositories have distinct roles: standards prescribe, knowledge preserves, and research investigates. None is a substitute for the others.
 
+## Knowledge & Workspace
+
+FlossWare uses GitHub and Notion for complementary purposes:
+
+- **[Notion Knowledge Hub](https://app.notion.com/p/3dacc41ae77d81188b4ad3f04d9b14fc)** provides a human-friendly workspace for exploring architecture, understanding decisions, tracking research and experiments, and navigating project knowledge.
+- **[GitHub Knowledge](https://github.com/FlossWare/knowledge)** maintains the version-controlled corpus of durable knowledge, findings, evidence, and provenance.
+- **[GitHub Standards](https://github.com/FlossWare/standards)** defines the authoritative normative rules governing FlossWare projects.
+- **GitHub software repositories** hold executable contracts, implementations, tests, and implementation-specific documentation.
+
+Notion connects these resources through curated explanations and navigation. Each artifact retains its appropriate source of authority, avoiding competing copies of decisions, standards, and implementation details.
+
 ## How projects fit together
 
 FlossWare projects cover different problems and may share contracts, libraries, or services when that creates a useful boundary. No single implementation or project defines the organization as a whole.
