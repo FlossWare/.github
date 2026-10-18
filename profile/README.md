@@ -1,60 +1,56 @@
 # FlossWare
 
-**Free-first, modular infrastructure and AI-assisted engineering.**
+**Composable software capabilities, contract-first architecture, and AI-assisted engineering.**
 
-FlossWare builds reusable engineering foundations and reference implementations using open standards, explicit configuration, and loosely coupled architectures.
+FlossWare develops reusable software contracts, implementations, and engineering foundations. Its architecture emphasizes explicit boundaries, language-neutral contracts, composable capabilities, and evidence-backed decisions.
 
-## Featured Projects
+## Start here
 
-| Repository | Purpose |
+| Repository | Responsibility |
 |---|---|
-| [engineering-standards](https://github.com/FlossWare/engineering-standards) | Architecture decisions, engineering principles, and development standards |
-| [commons-java](https://github.com/FlossWare/commons-java) | Shared Java foundation libraries |
-| [tftp-os](https://github.com/FlossWare/tftp-os) | Reference implementation for infrastructure provisioning and automation |
+| [standards](https://github.com/FlossWare/standards) | Authoritative normative rules and cross-project standards |
+| [knowledge](https://github.com/FlossWare/knowledge) | Canonical Git-backed corpus for durable knowledge, decisions, research outcomes, evidence, and provenance |
+| [research](https://github.com/FlossWare/research) | Investigations, experiments, and architectural exploration before conclusions are promoted |
+| [loom](https://github.com/FlossWare/loom) | Language-neutral Loom contracts and semantic model |
+| [loom-python](https://github.com/FlossWare/loom-python) | Python implementation of the Loom contract |
+| [loom-ai](https://github.com/FlossWare/loom-ai) | AI-domain contracts and semantics built on Loom |
+| [loom-ai-python](https://github.com/FlossWare/loom-ai-python) | Python implementation of the AI-domain contracts |
 
-## Architecture Principles
+## Architecture
 
-FlossWare systems follow these core ideas:
-
-- **Configuration is the source of truth**
-- **Minimal behavior by default; capabilities are explicitly enabled**
-- **Components are modular and composable**
-- **Open standards over vendor lock-in**
-- **Loose coupling through stable contracts**
-
-## Reference Architecture
+Loom is a language-neutral execution substrate. AI is a domain built on Loom, not the definition of Loom itself. Capability repositories provide focused functionality behind explicit contracts; clients integrate through supported interfaces rather than becoming part of Loom's internal implementation.
 
 ```text
-                 Clients / Agents
-                       |
-          REST APIs / MCP Tool Interfaces
-                       |
-              Service Boundaries
-                       |
-        +--------------+--------------+
-        |                             |
-  Stored Procedures              Message Bus
-        |                             |
-        v                             v
-    Databases                 Event Consumers
+Foundational contracts
+        |
+        +-- language implementations
+        |
+        +-- domain contracts
+                 |
+                 +-- domain implementations
+
+Knowledge records durable context and provenance.
+Research investigates questions and tests hypotheses.
+Standards defines normative rules.
+Software repositories own executable contracts, tests, and implementations.
 ```
 
-## Integration Model
+## Where things belong
 
-- **REST** provides synchronous service contracts.
-- **MCP** provides AI agent and tool integration contracts.
-- **Message buses** provide asynchronous workflows and event-driven integration.
-- **Stored procedures** provide database abstraction where they add value.
-- **ADRs** preserve architectural decisions.
+- **Standards** prescribe cross-project rules.
+- **Knowledge** preserves durable, reusable knowledge and its provenance.
+- **Research** records investigations and experiments that may still be incomplete or wrong.
+- **Software repositories** own their contracts, executable implementations, tests, and implementation-specific documentation.
+- **This GitHub organization profile** is an entry point, not a competing documentation or knowledge source.
 
-## Documentation
+The public documentation site is published from [FlossWare/FlossWare](https://github.com/FlossWare/FlossWare). It presents selected documentation; it does not replace the canonical knowledge corpus or software repositories.
 
-The canonical architecture documentation lives in:
+## Engineering principles
 
-- [FlossWare/engineering-standards](https://github.com/FlossWare/engineering-standards)
+- Keep foundational contracts language-neutral.
+- Separate contracts from language-specific implementations.
+- Keep domain semantics distinct from foundational contracts.
+- Preserve provenance across research, decisions, derivation, and execution.
+- Prefer explicit composition and stable boundaries over unnecessary coupling.
+- Treat research conclusions as evidence to evaluate, not automatically as normative rules.
 
-See the repository ADRs for detailed architectural decisions.
-
-## Contributing
-
-Contributions should align with the FlossWare engineering standards. Projects should favor clarity, composability, and maintainable open designs over unnecessary complexity.
